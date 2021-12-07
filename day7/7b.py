@@ -15,13 +15,11 @@ moves = np.arange(x0, x1)
 best_fuel = np.inf
 best_move = -1
 
-def calc_fuel(offset):
-    return np.arange(offset + 1).sum()
-
 for move in moves:
-    offset = positions - move
-    fuel = np.apply_along_axis(calc_fuel, 1, np.abs(offset).reshape(-1,1))
-    fuel = fuel.sum()
+    offset = np.abs(positions - move)
+
+    fuel = (offset * (offset+1)) / 2
+    fuel = int(fuel.sum())
 
     if fuel < best_fuel:
         best_move = move
