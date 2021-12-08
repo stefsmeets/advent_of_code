@@ -10,42 +10,6 @@ def normalize(key):
 
 numbers = defaultdict(int)
 
-
-mapping = {
-    'ab': 1,
-    'acedgfb': 8,
-    'cagedb': 0,
-    'cdfbe': 5,
-    'cdfgeb': 6,
-    'cefabd': 9,
-    'dab': 7,
-    'eafb': 4,
-    'fbcad': 3,
-    'gcdfa': 2,
-}
-
-mapping = {normalize(key): value for key, value in mapping.items()}
-
-# LEFT_TOP : 6 # unique
-# LEFT_BOT : 4 # unique
-# RIGHT_TOP : 8 
-# RIGHT_BOT : 9 # unique
-# BOT : 7 
-# TOP : 8 
-# MID : 7 
-
-# 0: 6
-# 1: 2
-# 2: 5
-# 3: 5
-# 4: 4
-# 5: 5
-# 6: 6
-# 7: 3
-# 8: 7
-# 9: 6
-
-
 outputs = []
 
 for line in lines:
