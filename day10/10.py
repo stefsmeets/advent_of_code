@@ -30,39 +30,25 @@ incomplete_scores = []
 for chunk in lines:
     chunk = chunk.strip()
     
-    is_corrupted = False
     heap = []
 
     for char in chunk:
-        # print(''.join(heap), repr(char))
         
         if char in mapping:
             heap.append(char)
         
-        elif not heap:
-            print('heap empty')
+        elif mapping[heap.pop()] != char:
+            corrupted_score += corrupted_score_table[char]
             break
-        
-        else:
-            lastchar = heap.pop()
-            expected = mapping[lastchar]
-            if expected != char:
-                print(f'corrupted, got {char} expected {expected}')
-                corrupted_score += corrupted_score_table[char]
-                is_corrupted = True
-                break
-            else:
-                assert expected == char
 
-    if not is_corrupted:
+    else:
         score = 0
-        for char in reversed(heap):
+        for opening in reversed(heap):
             score *= 5
-            closing = mapping[char]
+            closing = mapping[opening]
             score += incomplete_score_table[closing]
         
         incomplete_scores.append(score)
-        # print(heap, score)
 
 print(f'{corrupted_score=}')
 
