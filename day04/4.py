@@ -19,27 +19,33 @@ def check(marked_board):
 
     return bingo_hor or bingo_ver
 
-bingo = False
+winners = []
 
 for move in moves:
+    bingo = False
+
     for n, (board, marked_board) in enumerate(zip(boards, marked_boards)):
         marked_board[board == move] = False
         bingo = check(marked_board)
 
         if bingo:
-            break
+            if len(winners) == 0:
+                total = board[marked_board].sum()
 
-    if bingo:
-        print(f'Bingo! #{n}')
+                # part 1
+                print(f'part 1: {total * move=}')
+            
+            if n not in winners:
+                winners.append(n)
+
+    if len(winners) == len(boards):
         break
 
-print()
-print(board)
-print(marked_board)
-print()
 
+winner = winners[-1]
+board = boards[winner]
+marked_board = marked_boards[winner]
 total = board[marked_board].sum()
 
-print(f'{total=}')
-print(f'{move=}')
-print(f'{total * move}')
+# part 2
+print(f'part 2: {total * move=}')

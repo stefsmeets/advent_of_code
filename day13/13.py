@@ -1,6 +1,6 @@
 import numpy as np
 
-filename = 'data.txt'
+filename = 'tweakers.input'
 
 with open(filename) as f:
     lines = (line.strip() for line in f.readlines())
@@ -22,9 +22,6 @@ shape = dots.max(axis=0) + 1
 grid = np.zeros(shape)
 
 grid[dots[:,0], dots[:,1]] = 1
-
-# print(grid.shape)
-# print(folds)
 
 for i, (direction, line_no) in enumerate(folds):
     if direction == 'y':
@@ -50,8 +47,7 @@ for i, (direction, line_no) in enumerate(folds):
         n_dots_first_fold = np.sum(grid>0)
 
 
-# part 1
-print(f'{n_dots_first_fold=}')
+print(f'part 1: {n_dots_first_fold=}')
 
 import matplotlib.pyplot as plt
 plt.imshow((grid>0).T)

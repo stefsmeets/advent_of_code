@@ -19,11 +19,11 @@ lava_tubes = heightmap < filtered
 
 risk = np.sum(heightmap[lava_tubes] + 1)
 
-print(f'{risk=}')
+print(f'part 1: {risk=}')
 
 basins, n_basins = ndi.label(heightmap < 9)
 basin_sizes = [(basins==i+1).sum() for i in range(n_basins)]
 
 three_largest_basins = sorted(basin_sizes, reverse=True)[0:3]
 
-print(f'{np.product(three_largest_basins)=}')
+print(f'part 2: {np.product(three_largest_basins)=}')

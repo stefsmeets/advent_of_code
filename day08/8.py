@@ -10,7 +10,8 @@ def normalize(key):
 
 numbers = defaultdict(int)
 
-outputs = []
+output_part2 = 0
+output_part1 = 0
 
 for line in lines:
     mapping = {}
@@ -33,6 +34,7 @@ for line in lines:
         else:
             continue
 
+        numbers
         mapping[pattern] = match
         reverse_mapping[match] = set(pattern)  
 
@@ -69,16 +71,17 @@ for line in lines:
 
     assert len(mapping) == 10
 
-    output = 0
+    code = 0
 
     for i, digit in enumerate(digits):
         digit = normalize(digit)
         number = mapping[digit]
+        if number in (1,4,7,8):
+            output_part1 += 1
 
-        output += number * (10**(3-i))
+        code += number * (10**(3-i))
 
-    outputs.append(output)
+    output_part2 += code
 
-    print(digits, output)
-
-print(sum(outputs))
+print(f'part 1: {output_part1=}')
+print(f'part 2: {output_part2=}')

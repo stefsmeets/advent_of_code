@@ -32,9 +32,9 @@ def get_paths(G, path=['start'], visit_twice=False):
 # part 1
 paths_1 = get_paths(G)
 n_paths_1 = sum(1 for path in paths_1)
-print(f'{n_paths_1=}')
+print(f'part 1: {n_paths_1=}')
 
 # part 2
 paths_2 = get_paths(G, visit_twice=True)
 n_paths_2 = sum(1 for path in paths_2)
-print(f'{n_paths_2=}')
+print(f'part 2: {n_paths_2=}')

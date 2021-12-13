@@ -50,9 +50,9 @@ for chunk in lines:
         
         incomplete_scores.append(score)
 
-print(f'{corrupted_score=}')
+print(f'part 1: {corrupted_score=}')
 
 middle = len(incomplete_scores) // 2
 middle_incomplete_score = sorted(incomplete_scores)[middle]
 
-print(f'{middle_incomplete_score=}')
+print(f'part 2: {middle_incomplete_score=}')

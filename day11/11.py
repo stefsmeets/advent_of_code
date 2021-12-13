@@ -41,6 +41,5 @@ for step in range(1000):
         sync_step = step + 1
         break
 
-print(f'{n_flashes_at_100=}')
-print(f'{n_flashes=}')
-print(f'{sync_step=}')
+print(f'part 1: {n_flashes_at_100=}')
+print(f'part 2: {sync_step=}')
