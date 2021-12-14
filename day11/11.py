@@ -7,7 +7,7 @@ with open(filename) as f:
 
 grid = np.array([[int(val) for val in line.strip()] for line in lines])
 
-def get_adjecent(index):
+def get_adjacent(index):
     i, j = index
     n = 1
     left = max(0, i - n)
@@ -28,7 +28,7 @@ for step in range(1000):
 
         for octopus in np.argwhere(flashing_octopi):
             n_flashes += 1
-            grid[get_adjecent(octopus)] += 1
+            grid[get_adjacent(octopus)] += 1
 
     grid[grid < 0] = 0
 
