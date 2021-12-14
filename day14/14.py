@@ -24,8 +24,8 @@ def solve(template, steps):
             
             counter[insert] += count
 
-            new_pairs[left + insert] += count
-            new_pairs[insert + right] += count
+            new_pairs[left, insert] += count
+            new_pairs[insert, right] += count
 
         pairs = new_pairs
 
