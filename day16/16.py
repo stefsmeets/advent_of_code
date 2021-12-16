@@ -1,4 +1,4 @@
-
+from math import prod
 
 filename = 'data.txt'
 
@@ -108,20 +108,13 @@ def parse_data(data):
     return {**metadata, "packets": packets}
 
 
-data = iter(data)
-result = parse_data(data)
-
-# part 1
-print(f'part 1: {sum(VERSIONS)=}')
-
-
-from math import prod
-
 def gt(lst):
     return lst[0] > lst[1]
 
+
 def lt(lst):
     return lst[0] < lst[1]
+
 
 def eq(lst):
     return lst[0] == lst[1]
@@ -137,6 +130,7 @@ operators = {
     7: eq, 
 }
 
+
 def compute(packet):
     type_id = packet['type_id']
 
@@ -149,6 +143,13 @@ def compute(packet):
     value = operator([compute(subpacket) for subpacket in subpackets]) 
 
     return value
+
+
+data = iter(data)
+result = parse_data(data)
+
+# part 1
+print(f'part 1: {sum(VERSIONS)=}')
 
 # part 2
 print(f'part 2: {compute(result)=}')
