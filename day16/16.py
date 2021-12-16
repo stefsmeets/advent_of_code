@@ -68,7 +68,6 @@ def parse_type_other(data):
     if leading_bit == 0:
         subpacket_len = grab_next_value(data, 15)
         
-        packets = []
         raw = ''.join((next(data) for i in range(subpacket_len)))
         raw = iter(raw)
 
