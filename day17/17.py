@@ -59,8 +59,17 @@ class Probe:
 
 success = []
 
-for vx in range(0, 70):
-    for vy in range(-300, 300):
+# find sensible min/max velocities
+vx_min = 0
+while ((vx_min+1)*(vx_min+2)) / 2 > x_min:
+    vx_min += 1
+vx_max = x_max + 1
+
+vy_min = min(y_min, y_max)
+vy_max = max(abs(y_min), abs(y_max))
+
+for vx in range(vx_min, vy_max):
+    for vy in range(vy_min, vy_max):
         p = Probe(vx, vy)
         if p.run_until_end():
             success.append(p)
