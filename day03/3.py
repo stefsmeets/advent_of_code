@@ -13,14 +13,15 @@ gamma = gamma.astype(int)
 
 epsilon = 1 - gamma
 
-gamma_val = int('0b' + ''.join([str(val) for val in gamma]), 2)
-epsilon_val = int('0b' + ''.join([str(val) for val in epsilon]), 2)
+def to_int(x):
+    return int('0b' + ''.join([str(val) for val in x]), 2)
+
+gamma_val = to_int(gamma)
+epsilon_val = to_int(epsilon)
 
 power_consumption = gamma_val * epsilon_val
 
-print(f'{gamma_val=}')
-print(f'{epsilon_val=}')
-print(f'{power_consumption=}')
+print(f'part 1: {power_consumption=}')
 
 ncols = bits.shape[1]
 
@@ -52,11 +53,11 @@ for ncol in range(ncols):
     if len(co2_scrubber) == 1:
         break
 
-oxygen_generator_val = int('0b' + ''.join([str(val) for val in oxygen_generator.squeeze()]), 2)
-co2_scrubber_val =     int('0b' + ''.join([str(val) for val in co2_scrubber.squeeze()]), 2)
+oxygen_generator_val = to_int(oxygen_generator.squeeze())
+co2_scrubber_val = to_int(co2_scrubber.squeeze())
 
 life_support = oxygen_generator_val * co2_scrubber_val
 
-print(f'{oxygen_generator_val=}')
-print(f'{co2_scrubber_val=}')
-print(f'{life_support=}')
+print(f'part 2: {life_support=}')
+
+breakpoint()
