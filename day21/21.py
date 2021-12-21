@@ -26,17 +26,14 @@ player = 0
 rolls_per_turn = 3
 N_ROLLS = 0
 
-while True:
+while max(scores) < 1000:
     N_ROLLS += rolls_per_turn
     roll = sum(next(die) for _ in range(rolls_per_turn))
     positions[player] = (positions[player] + roll - 1) % 10 + 1
     scores[player] += positions[player]
-
-    if scores[player] >= 1000:
-        loser = scores[not player]
-        break
-
     player = int(not player)
+
+loser = min(scores)
 
 print(f'part 1: {loser*N_ROLLS=}')
 
