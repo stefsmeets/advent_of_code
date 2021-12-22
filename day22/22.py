@@ -1,4 +1,3 @@
-import numpy as np
 from dataclasses import dataclass
 from collections import Counter
 
@@ -7,12 +6,14 @@ filename = 'data.txt'
 with open(filename) as f:
     lines = f.readlines()
 
-SHIFT = 50
-
 def grab_range(val, line):
     part = line[line.index(f'{val}=')+2:].split(',')[0]
     minval, maxval = [int(val) for val in part.split('..')]
-    return minval + SHIFT, maxval + SHIFT
+    return minval, maxval
+
+
+def count(cubes):
+    return sum(box.volume * sign for box, sign in cubes.items())
 
 
 @dataclass
@@ -44,7 +45,7 @@ class Box:
             return -1
         if self.z1 < self.z0:
             return -1
-        return (self.x1 - self.x0) * (self.y1 - self.y0) * (self.z1 - self.z0)
+        return (self.x1 - self.x0 + 1) * (self.y1 - self.y0 + 1) * (self.z1 - self.z0 + 1)
 
     def intersection(self, other):
         x0 = max(self.x0, other.x0)
@@ -56,35 +57,28 @@ class Box:
 
         return self.__class__(x0, x1, y0, y1, z0, z1)
 
-    def to_slice(self):
-        return np.s_[self.x0: self.x1+1, self.y0: self.y1+1, self.z0:self.z1+1]
-
 
 boxes = [Box.from_line(line) for line in lines]
+subregion = Box(-50, 50, -50, 50, -50, 50)
 
-cubes = np.zeros((101, 101, 101))
-
-for switch, box in boxes:
-    idx = box.to_slice()
-    if cubes[idx].size != 0:
-        cubes[idx] = switch
-
-print(f'part 1: {int(cubes.sum())=}')
-
-box_counter = Counter()
+cubes_all = Counter()
+cubes_subregion = Counter()
 
 for switch, box in boxes:
     intersect_boxes = Counter()
-    
-    for other, other_sign in box_counter.items():
+    for other, other_sign in cubes_all.items():
         intersection = box.intersection(other)
 
         if intersection.volume > 0:
             intersect_boxes[intersection] -= other_sign
     
     intersect_boxes[box] += switch
+    cubes_all.update(intersect_boxes)
 
-    box_counter.update(intersect_boxes)
+    # part 1
+    if box.intersection(subregion).volume > 0:
+        cubes_subregion.update(intersect_boxes)
 
-n_cubes = sum(box.volume * sign for box, sign in box_counter.items())
-print(f'part 2: {n_cubes=}')
+
+print(f'part 1: {count(cubes_subregion)=}')
+print(f'part 2: {count(cubes_all)=}')
